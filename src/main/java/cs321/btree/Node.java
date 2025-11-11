@@ -1,36 +1,21 @@
 package cs321.btree;
 
-public class Node<T> {
-    private Node<T> left;
-    private Node<T> right;
+public class Node<T extends Comparable<T>> {
+
     private Node<T> parent;
+    private Node<T>[] children;
     private T value;
 
-    public Node(T value) {
+    public Node(T value , int degree) {
         this.value = value;
+        this.children = new Node[degree];
     }
-    public Node(T value, Node<T> parent) {
+    public Node(T value, Node<T> parent , int degree) {
         this.value = value;
         this.parent = parent;
+        this.children = new Node[degree];
     }
-    public Node(T value, Node<T> left, Node<T> right, Node<T> parent) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
-        this.parent = parent;
-    }
-    public Node<T> getLeft() {
-        return left;
-    }
-    public void setLeft(Node<T> left) {
-        this.left = left;
-    }
-    public Node<T> getRight() {
-        return right;
-    }
-    public void setRight(Node<T> right) {
-        this.right = right;
-    }
+
     public Node<T> getParent() {
         return parent;
     }
@@ -42,6 +27,31 @@ public class Node<T> {
     }
     public void setValue(T value) {
         this.value = value;
+    }
+
+    public Node<T>[] getChildren() {
+        return children;
+    }
+
+    public void addChild(Node<T> child) {
+        int index = 0;
+        while(children[index] != null && children[index].getValue().compareTo(child.getValue()) > 0 && index < children.length - 1) {
+            index++;
+        }
+        if(index == children.length) {
+            // write fancy split stuff but I'm lazy will finish later
+            /*TODO*/
+        }
+        if(children[index] == null) {
+            children[index] = child;
+        }
+        else {
+            while( children[index] != null && index < children.length - 1) {
+                Node<T> temp = children[index];
+                children[index] = child;
+                child = temp;
+            }
+        }
     }
 
 }

@@ -15,6 +15,19 @@ public class BTree implements BTreeInterface
         root = null;
     }
 
+    public BTree(int degree, Node<TreeObject> root){
+        this.degree = degree;
+        this.root = root;
+    }
+
+    public BTree(int degree , String filename){
+        //must handle exceptions
+    }
+
+    public BTree(String filename){
+        //must handle exceptions
+    }
+
     @Override
     public long getSize() {
         return 0;
